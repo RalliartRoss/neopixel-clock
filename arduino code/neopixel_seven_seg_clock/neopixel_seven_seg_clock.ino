@@ -73,6 +73,19 @@ void setup() {
   Serial.begin(9600);
   Clock.begin();
 
+  // Erase the contents of the EEPROM
+  Clock.formatEEPROM();
+  
+  // First we will disable any existing alarms
+  Clock.disableAlarms();
+  
+  // And now add the alarm to happen every second
+  Clock.setAlarm(DS3231_Simple::ALARM_EVERY_SECOND); 
+  
+  Serial.println(F("Logging value of analogRead(A1), enter any character to dump the log."));
+  
+
+
   stripClock.begin();           // INITIALIZE NeoPixel stripClock object (REQUIRED)
   stripClock.show();            // Turn OFF all pixels ASAP
   stripClock.setBrightness(100); // Set inital BRIGHTNESS (max = 255)
